@@ -1,9 +1,11 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
+import {Navigate} from 'react-router-dom'
 export default function Main(){
     const [registerPage, setRegisterPage] = useState(false)
     const [loginPage, setLoginPage] = useState(false)
     const [method, registerMethod] = useState('number')
+    const [isLog, setLog] = useState(false)
     const register = (val) =>{
         setRegisterPage(val)
     }
@@ -53,8 +55,9 @@ export default function Main(){
         }
 
         axios.post('http://localhost:3001/login/',user).then(result=>{
-            console.log(result)
-       }).catch(error=>{
+            console.log(result);
+            setLog(true)
+        }).catch(error=>{
            console.log(error)
            return Promise.reject(error)
        })
@@ -62,6 +65,9 @@ export default function Main(){
 
     return(
     <div className="registerpage">   
+    {
+        isLog?<Navigate to="/tl" />:null
+    }
             {
                 registerPage?
                 <div className="register-form">
