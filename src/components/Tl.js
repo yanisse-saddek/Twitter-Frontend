@@ -1,9 +1,12 @@
-
+import { useContext, useEffect } from 'react';
+import {UserContext} from '../App'
+import {Navigate} from 'react-router-dom'
 function Tl() {
+    const context = useContext(UserContext)
   return (
-    <p>
-        ok
-    </p>
+   <>
+    {!context.Log?<Navigate to="/" />:null}
+   </>
     );
 }
 
